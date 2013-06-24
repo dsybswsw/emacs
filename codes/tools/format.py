@@ -6,25 +6,26 @@ __date__ ="$April 23, 2013"
 
 import sys
 
-def format(input_file, output_file):
+def format(input_file):
     badfile=open(input_file,'rb')
     badstr=badfile.read()
     goodstr=badstr.decode('cp936').encode('utf-8')
+    badfile.close()
+    output_file = input_file
     goodfile=open(output_file,'wb')
     goodfile.write(goodstr)
-    badfile.close()
     goodfile.close
 
 def usage():
-    print './format.py input output'
+    print './format.py input'
 
 def main():
     args = sys.argv
-    if len(args) != 3:
+    if len(args) != 2:
         usage()
+        print args
         return
-    format(args[1], args[2])
+    format(args[1])
 
 if __name__ == '__main__':
     main()
-
