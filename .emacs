@@ -1,18 +1,25 @@
-
-'(custom-set-variables
+(custom-set-variables
   ;; custom-set-variables was added by Custom.>
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance. 
   ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t))
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
 (put 'upcase-region 'disabled nil)
 
+;; disable the toolbar
+(menu-bar-mode -1)
+
+;; font settings
+(set-default-font "Inconsolata 12")
+;; (set-frame-font “MONACO-12″)
 ;; (set-background-color "black") ;; 使用黑色背景
 ;; (set-foreground-color "white") ;; 使用白色前景
 ;; (set-face-foreground 'region "green")  ;; 区域前景颜色设为绿色
@@ -21,9 +28,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisps/")
 
-(require 'color-theme)
+;; (color-theme-initialize)
 
-(color-theme-initialize)
+;; set theme
+(load-theme 'molokai)
+(setq molokai-theme-kit t)
 
 ;;(color-theme-lawrence)                  ;
 ;;(color-theme-billw)
@@ -31,11 +40,14 @@
 ;;(color-theme-calm-forest)
 ;;(color-theme-classic)
 ;;(color-theme-hober)
-;; (color-theme-clarity)
-(color-theme-charcoal-black)
+;;(color-theme-clarity)
+;;(color-theme-charcoal-black)
 ;;(color-theme-comidia)
 
+;; enable line number mode.
+(global-linum-mode t)
 
+;; enable web mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -61,8 +73,10 @@
  (require 'ibus)
  (add-hook 'after-init-hook 'ibus-mode-on)
 
+;; share clipboard.
  (setq x-select-enable-clipboard t)
 (tool-bar-mode -1)
+
 ;;(menu-bar-mode -1)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
@@ -84,3 +98,6 @@
 
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
+
+; start server mode.
+(server-start)
